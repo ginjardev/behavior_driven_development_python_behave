@@ -1,0 +1,9 @@
+[
+  {
+    "platform": "Windows 11",
+    "browserName": "chrome",
+    "version": "latest",
+    "build": "BDD: Python Behave Build",
+    "name": "BDD: Python Behave"
+  }
+]
