@@ -2,9 +2,11 @@
 Selenium steps to configure behave test scenarios
 """
 from behave import *
+from behave import given, when, then
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
 
 def wait_for_element(context, by, value, timeout=10):
     return WebDriverWait(context.browser, timeout).until(

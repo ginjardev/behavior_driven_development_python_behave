@@ -1,7 +1,8 @@
-
 from behave.model_core import Status
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.edge.options import Options as EdgeOptions
 import os
 import json
 
@@ -18,7 +19,6 @@ username = os.environ["LT_USERNAME"]
 authkey = os.environ["LT_ACCESS_KEY"]
 
 
-
 def before_scenario(context, scenario):
     try:
         desired_cap = setup_desired_cap(CONFIG[INDEX])
@@ -27,6 +27,14 @@ def before_scenario(context, scenario):
             options = ChromeOptions()
             options.browser_version = desired_cap.get("version", "latest")
             options.platform_name = "Windows 11"
+        elif 'Firefox' in scenario.tags:
+            options = FirefoxOptions()
+            options.browser_version = desired_cap.get("version", "latest")
+            options.platform_name = "Windows 10"
+        elif 'Edge' in scenario.tags:
+            options = EdgeOptions()
+            options.browser_version = desired_cap.get("version", "latest")
+            options.platform_name = "Windows 8"
         else:
             raise ValueError("Unsupported browser tag")
 
@@ -78,5 +86,3 @@ def setup_desired_cap(desired_cap):
     
     return cleaned_cap
 
-def before_all(context):
-    context.base_url = "https://jsonplaceholder.typicode.com"

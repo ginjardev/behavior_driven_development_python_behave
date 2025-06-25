@@ -3,7 +3,7 @@ from behave import given, when, then
 
 @given('the API endpoint is "{endpoint}"')
 def step_api_endpoint(context, endpoint):
-    context.url = context.base_url + endpoint
+    context.url = endpoint
 
 @when('I make a GET request')
 def step_get_request(context):
