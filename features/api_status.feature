@@ -1,4 +1,4 @@
-Feature: Public API - Post Retrival
+Feature: Public API - Post Retrieval
 
     @Chrome
     Scenario Outline:

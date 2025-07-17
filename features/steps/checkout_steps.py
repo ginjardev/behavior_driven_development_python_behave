@@ -1,21 +1,12 @@
-from multiprocessing import context
 from behave import given, when, then
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
 
 def wait_for_element(context, by, value, timeout=10):
     return WebDriverWait(context.browser, timeout).until(
         EC.presence_of_element_located((by, value))
 )
-
-def wait_for_clickable_element(context, by, value, timeout=10):
-    return WebDriverWait(context.browser, timeout).until(
-        EC.element_to_be_clickable((by, value))
-    )
-
 
 @given('the user is on the product page link "{url}"')
 def step_open_product_page(context, url):
@@ -30,9 +21,9 @@ def step_click_buy_now(context):
 @when('the user fills in billing and payment details')
 def step_fill_checkout_form(context):
     # fill in the billing and payment details
-    context.browser.find_element(By.ID, 'input-payment-firstname').send_keys('Giga')
-    context.browser.find_element(By.ID, 'input-payment-lastname').send_keys('Doe')
-    context.browser.find_element(By.ID, 'input-payment-email').send_keys('gigadoe@gmail.com')
+    context.browser.find_element(By.ID, 'input-payment-firstname').send_keys('Jess')
+    context.browser.find_element(By.ID, 'input-payment-lastname').send_keys('Perez')
+    context.browser.find_element(By.ID, 'input-payment-email').send_keys('jessp@gmail.com')
     context.browser.find_element(By.ID, 'input-payment-telephone').send_keys('98765432')
     context.browser.find_element(By.ID, 'input-payment-password').send_keys('password')
     context.browser.find_element(By.ID, 'input-payment-confirm').send_keys('password')
@@ -55,7 +46,7 @@ def step_fill_checkout_form(context):
 @when('the user confirms the order')
 def step_confirm_order(context):
     # click the "Confirm Order" button
-    confirm_button = wait_for_clickable_element(context, By.ID, "button-confirm")
+    confirm_button = wait_for_element(context, By.ID, "button-confirm")
     context.browser.execute_script("arguments[0].scrollIntoView(true);", confirm_button)
     context.browser.execute_script("arguments[0].click();", confirm_button)
 
